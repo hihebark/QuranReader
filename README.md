@@ -1,4 +1,4 @@
-# Quran Gnome
+# Quran Reader
 
 A native GNOME application for reading the Quran, built with Python, GTK4, and libadwaita.
 
