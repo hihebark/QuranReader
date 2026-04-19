@@ -29,6 +29,7 @@
 
   <url type="homepage">https://github.com/hihebark/quran-reader</url>
   <url type="bugtracker">https://github.com/hihebark/quran-reader/issues</url>
+  <url type="vcs-browser">https://github.com/hihebark/quran-reader</url>
 
   <developer id="io.github.hihebark">
     <name>hihebark</name>
