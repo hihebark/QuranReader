@@ -1,0 +1,13 @@
+#!/usr/bin/env @PYTHON@
+import sys
+
+from quran_reader.window import QuranBrowser
+
+
+def main():
+    app = QuranBrowser()
+    app.run(sys.argv)
+
+
+if __name__ == '__main__':
+    main()

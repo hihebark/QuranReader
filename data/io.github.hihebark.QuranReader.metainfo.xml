@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.hihebark.QuranReader</id>
+
+  <name>Quran Reader</name>
+  <summary>Read and browse the Holy Quran</summary>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Unlicense</project_license>
+
+  <description>
+    <p>
+      Quran Reader is a native GNOME application for reading the Holy Quran.
+      It offers two reading modes: a faithful Mushaf rendering using
+      ligature-based SVG pages, and a text mode with Arabic and English
+      (Sahih International) side by side.
+    </p>
+    <ul>
+      <li>Mushaf mode — authentic page-by-page rendering (604 pages, Mushaf Qatar)</li>
+      <li>Text mode — ayah-by-ayah view with Arabic and English translation</li>
+      <li>Bilingual sidebar — surah list in Arabic or English with live search</li>
+      <li>RTL-aware layout — sidebar moves to the right in Arabic mode</li>
+      <li>Keyboard navigation — arrow keys and Page Up/Down in Mushaf mode</li>
+      <li>Copy ayahs — right-click to copy Arabic, English, or verse reference</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">io.github.hihebark.QuranReader.desktop</launchable>
+
+  <url type="homepage">https://github.com/hihebark/quran-reader</url>
+  <url type="bugtracker">https://github.com/hihebark/quran-reader/issues</url>
+
+  <developer id="io.github.hihebark">
+    <name>hihebark</name>
+  </developer>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#3d5a80</color>
+    <color type="primary" scheme_preference="dark">#1a2e45</color>
+  </branding>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Mushaf mode — authentic page rendering</caption>
+      <image>https://raw.githubusercontent.com/hihebark/gnome-quran/main/data/screenshots/mushaf.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Text mode — Arabic and English per ayah</caption>
+      <image>https://raw.githubusercontent.com/hihebark/gnome-quran/main/data/screenshots/text.png</image>
+    </screenshot>
+  </screenshots>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.1.0" date="2026-04-19">
+      <description>
+        <p>Initial release.</p>
+      </description>
+    </release>
+  </releases>
+
+  <categories>
+    <category>Education</category>
+    <category>Religion</category>
+  </categories>
+
+  <keywords>
+    <keyword>quran</keyword>
+    <keyword>islam</keyword>
+    <keyword>arabic</keyword>
+    <keyword>mushaf</keyword>
+    <keyword>reading</keyword>
+  </keywords>
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+</component>
