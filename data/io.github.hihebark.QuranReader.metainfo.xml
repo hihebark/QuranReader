@@ -61,19 +61,6 @@
     </release>
   </releases>
 
-  <categories>
-    <category>Education</category>
-    <category>Religion</category>
-  </categories>
-
-  <keywords>
-    <keyword>quran</keyword>
-    <keyword>islam</keyword>
-    <keyword>arabic</keyword>
-    <keyword>mushaf</keyword>
-    <keyword>reading</keyword>
-  </keywords>
-
   <requires>
     <display_length compare="ge">360</display_length>
   </requires>
