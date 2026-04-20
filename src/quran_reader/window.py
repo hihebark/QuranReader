@@ -20,6 +20,7 @@ class QuranBrowser(Adw.Application):
         self.current_page  = 1
         self.current_surah = None
         self._filtered     = list(SURAHS)
+        self._load_id     = 0
 
     # ------------------------------------------------------------------ lifecycle
 
@@ -218,6 +219,9 @@ class QuranBrowser(Adw.Application):
         return box
 
     def _load_text(self, surah_number: int):
+        self._load_id += 1
+        load_id = self._load_id
+
         while child := self.ayah_listbox.get_first_child():
             self.ayah_listbox.remove(child)
 
@@ -237,17 +241,27 @@ class QuranBrowser(Adw.Application):
         if not rows:
             return
 
-        # Basmala is prepended to ayah 1 by the source data for all surahs
-        # except Al-Fatihah (1, where it IS ayah 1) and At-Tawbah (9, no Basmala).
         if surah_number not in (1, 9) and rows[0][1].startswith(BASMALA):
             self.ayah_listbox.append(self._build_basmala_row())
             n, ar, en = rows[0]
             rows[0] = (n, ar[len(BASMALA):].lstrip(), en)
 
-        for ayah_num, arabic, english in rows:
+        self._load_batch(surah_number, rows, load_id)
+
+    def _load_batch(self, surah_number, rows, load_id, batch_start=0, batch_size=50):
+        if load_id != self._load_id:
+            return
+
+        batch_end = min(batch_start + batch_size, len(rows))
+        for i in range(batch_start, batch_end):
+            ayah_num, arabic, english = rows[i]
             self.ayah_listbox.append(
                 self._build_ayah_row(surah_number, ayah_num, arabic, english)
             )
+
+        if batch_end < len(rows):
+            GLib.idle_add(self._load_batch, surah_number, rows, load_id,
+                         batch_end, batch_size)
 
     def _build_basmala_row(self):
         row = Gtk.ListBoxRow()
