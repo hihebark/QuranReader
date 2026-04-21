@@ -290,12 +290,37 @@ class QuranBrowser(Adw.Application):
         page = max(1, min(604, page))
         self.current_page = page
         path = os.path.join(PAGES_DIR, f"{page:03d}.svg")
-        self.page_picture.set_file(
-            Gio.File.new_for_path(path) if os.path.exists(path) else None
-        )
+        if os.path.exists(path):
+            self._set_page_svg(path)
+        else:
+            self.page_picture.set_paintable(None)
         self.page_label.set_text(f"{page} / 604")
         self.btn_prev.set_sensitive(page > 1)
         self.btn_next.set_sensitive(page < 604)
+
+    def _set_page_svg(self, path: str):
+        # Try native GTK4 loader (works when gdk-pixbuf SVG loader is present)
+        try:
+            texture = Gdk.Texture.new_from_filename(path)
+            self.page_picture.set_paintable(texture)
+            return
+        except Exception:
+            pass
+        # Fallback: render via librsvg directly (GNOME Platform lacks pixbuf SVG loader)
+        try:
+            gi.require_version('Rsvg', '2.0')
+            from gi.repository import Rsvg
+            import warnings
+            with warnings.catch_warnings():
+                warnings.simplefilter('ignore', DeprecationWarning)
+                handle = Rsvg.Handle.new_from_file(path)
+                handle.set_dpi(192)
+                pixbuf = handle.get_pixbuf()
+            texture = Gdk.Texture.new_for_pixbuf(pixbuf)
+            self.page_picture.set_paintable(texture)
+        except Exception as e:
+            print(f"SVG render error: {e}")
+            self.page_picture.set_paintable(None)
 
     # ------------------------------------------------------------------ text view
 
